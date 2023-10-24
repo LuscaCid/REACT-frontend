@@ -31,3 +31,9 @@ export const StyledHeader = styled.header`
         flex-direction: column;
     }
 `
+
+/**
+ * 
+ * aula 397 *** meu gosh
+ * 
+ */
