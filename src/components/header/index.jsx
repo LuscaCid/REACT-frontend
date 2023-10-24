@@ -5,9 +5,10 @@ export function Header (){
     return (
         <StyledHeader>
             <div className="profile">
-                <img src="" alt="image of" />
+                <img src="https://github.com/luscaCid.png" alt="image of" />
                 <div id="name">
-                    <span>lucas</span>
+                    <span>Seja bem-vindo</span>
+                    <strong>lucas</strong>
                 </div>
             </div>
             <button>
