@@ -1,5 +1,5 @@
-
-import {StyledHeader} from './header'
+import {RiShutDownLine} from 'react-icons/ri'
+import {StyledHeader, Logout} from './header/'
 
 export function Header (){
     return (
@@ -11,9 +11,9 @@ export function Header (){
                     <strong>lucas</strong>
                 </div>
             </div>
-            <button>
-                <img src="" alt="fechar" />
-            </button>
+            <Logout>
+                <RiShutDownLine/>
+            </Logout>
         </StyledHeader>
     )
 }

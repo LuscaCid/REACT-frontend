@@ -31,7 +31,18 @@ export const StyledHeader = styled.header`
         flex-direction: column;
     }
 `
-
+export const Logout = styled.button`
+    border: none;
+    background: none;
+    >svg {
+        color: ${({theme})=> theme.COLORS.GRAY_100};
+        font-size: 24px;
+    }
+    cursor: pointer;
+    &:hover{
+        filter: brightness(1.3);
+    }
+`
 /**
  * 
  * aula 397 *** meu gosh
