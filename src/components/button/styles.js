@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 
 export const ButtonStyle = styled.button`
+    padding: 2rem;
+    display: flex;
     width: 100%;
+    align-items: center;
+    justify-content: center;
     background: ${({theme}) => {
         return theme.COLORS.ORANGE
     }};
