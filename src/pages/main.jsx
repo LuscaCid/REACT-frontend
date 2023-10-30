@@ -5,15 +5,15 @@ import { Home } from './home'
 import { SingIn } from './Singin' 
 import { SingUp } from './Singup'
 import { Profile } from './Profile'
+import { NewNote } from './New'
 import { ThemeProvider } from 'styled-components'
 import colors from "../styles/theme"
 import GlobalStyle  from '../styles/global'
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode >
     <ThemeProvider theme={colors}>
       <GlobalStyle/>
-    <Profile/>
+    <NewNote/>
     </ThemeProvider>
   </React.StrictMode>,
 )
