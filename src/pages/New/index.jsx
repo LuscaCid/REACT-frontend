@@ -3,6 +3,8 @@ import { Input } from "../../components/input";
 import {Header} from '../../components/header'
 import { Textarea } from "../../components/Textarea";
 import {Section} from '../../components/section'
+import { NoteItem } from "../../components/NoteItem";
+import { CreateButtonSend } from '../../components/button'
 import {FiLink} from 'react-icons/fi'
 export const NewNote = () => {
   return (
@@ -18,13 +20,23 @@ export const NewNote = () => {
             <Input type="text" placeholder = "Título"/>
             <Textarea placeholder="Observações"/>
             <Section title="Links úteis"/>
-              <Links>
-                <Input placeholder="Link" icon={FiLink}/>
-                <button>&times;</button>
-              </Links>
-              <span>
-                Novo link
-              </span>
+            <NoteItem 
+            value = "https://github.com/luscacid"
+            isNew = {false}/>
+            <NoteItem 
+            placeholder = "Novo link"
+            isNew/>
+
+            <Section title="Marcadores"/>
+            <div className="flex">
+            <NoteItem 
+            value = "https://github.com/luscacid"
+            isNew = {false}/>
+            <NoteItem 
+            placeholder = "Novo link"
+            isNew/>
+            </div>
+            <CreateButtonSend title= "Salvar" />
           </Form>
       </main>
     </Container>

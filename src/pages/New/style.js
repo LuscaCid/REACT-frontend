@@ -3,24 +3,27 @@ import styled from 'styled-components'
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-  
+  display: grid;
+  grid-template-rows: 105px auto;
+  grid-template-areas: 
+    "header"
+    "content"
+  ;
+  >main{
+    display: grid;
+    grid-area: content;
+    overflow-y: auto;
+  }
   
   
 
 `
 export const Form = styled.form`
   width: min(54rem, 90%) ;
-  margin: 5rem auto 0;
+  margin: 5rem auto ;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  >span {
-    width: 100%;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    border: 2px dashed   ${({theme}) => theme.COLORS.GRAY_100} ;
-    color: ${({theme})=> theme.COLORS.GRAY_100};
-  }
 
   >header{
     display: flex;
@@ -33,7 +36,12 @@ export const Form = styled.form`
       color: ${({theme})=> theme.COLORS.GRAY_100};
     }
 
-    
+  }
+
+  >.flex{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
   }
 `
 export const Links = styled.li`

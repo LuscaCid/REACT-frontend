@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const StyledHeader = styled.header`
     padding: 0 8rem;
+    
     width: 100%;
     grid-area: header;
     display: flex;
