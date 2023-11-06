@@ -1,17 +1,21 @@
 import {RiShutDownLine} from 'react-icons/ri'
-import {StyledHeader, Logout} from './header/'
-
+import {StyledHeader, Profile,Logout} from './header/'
+import { useAuth } from '../../hooks/auth'
 export function Header (){
+    const {signOut, user} = useAuth()
+    function logout(){
+        signOut()
+    }
     return (
-        <StyledHeader>
-            <div className="profile">
+        <StyledHeader >
+            <Profile to="/profile">
                 <img src="https://github.com/luscaCid.png" alt="image of" />
                 <div id="name">
                     <span>Seja bem-vindo</span>
-                    <strong>lucas</strong>
+                    <strong>{user.name}</strong>
                 </div>
-            </div>
-            <Logout>
+            </Profile>
+            <Logout onClick = {logout}>
                 <RiShutDownLine/>
             </Logout>
         </StyledHeader>

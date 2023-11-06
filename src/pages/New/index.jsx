@@ -5,6 +5,7 @@ import { Textarea } from "../../components/Textarea";
 import {Section} from '../../components/section'
 import { NoteItem } from "../../components/NoteItem";
 import { CreateButtonSend } from '../../components/button'
+import {Link} from 'react-router-dom'
 import {FiLink} from 'react-icons/fi'
 export const NewNote = () => {
   return (
@@ -15,7 +16,9 @@ export const NewNote = () => {
           <Form>
             <header>
               <h1>Criar nota</h1>
-              <a href="/">Voltar</a>
+                    
+              <Link to='/'>Voltar</Link>
+              
             </header>
             <Input type="text" placeholder = "Título"/>
             <Textarea placeholder="Observações"/>
@@ -47,3 +50,11 @@ export const NewNote = () => {
  * ou seja, ele aperta em novo link e gera mais um espaco
  * deste dai
  */
+
+/**
+ * 
+ * basciamente o link do react router dom substitui o a
+ * logo eu posso tanto estilizar uma div que eh um link
+ * que é passado dentro styled components quando estilizar
+ * ele proprio
+*/

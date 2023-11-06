@@ -3,13 +3,14 @@ import {FiCamera, FiMail, FiLock, FiArrowLeft, FiUser} from 'react-icons/fi'
 import {Input} from '../../components/input'
 import { CreateButtonSend } from '../../components/button' 
 import { Button } from 'style-components'
+import { Link } from 'react-router-dom'
 export function Profile(){
   return (
     <Container>
       <header>
-        <a href="#">
+        <Link to="/">
           <FiArrowLeft/>
-        </a>
+        </Link>
       </header>
       <Form>
         <Avatar>

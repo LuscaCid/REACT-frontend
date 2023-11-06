@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export const StyledHeader = styled.header`
+export const StyledHeader = styled(Link)`
     padding: 0 8rem;
     
     width: 100%;
@@ -8,17 +9,20 @@ export const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid ${({theme}) => theme.COLORS.BACKGROUND_700};
-    .profile{
-        align-items: center;
-        display: flex;
-        gap: 1rem;
-        padding: 2rem .5rem;
-    }
-    .profile img {
+    
+`
+export const Profile = styled(Link)`
+    width: fit-content;
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    padding: 2rem .5rem;
+    >img{
         width: 7rem;
         height: 7rem;
         border-radius: 50%;
     }
+    
     #name span {
         color: ${({theme})=> theme.COLORS.GRAY_100};
         font-size: 1.4rem;
@@ -31,6 +35,7 @@ export const StyledHeader = styled.header`
         display: flex;
         flex-direction: column;
     }
+
 `
 export const Logout = styled.button`
     border: none;
