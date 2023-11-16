@@ -64,7 +64,7 @@ export function Details() {
         <Links>
           {
             links && links.map(link => {
-              return <li key ={link.id}>
+              return <li key ={String(link.id)}>
                 <a href={link.url} target='_blank'>{link.url}</a>
                 </li>
             })
@@ -76,7 +76,7 @@ export function Details() {
           {
             tags && tags.map(tag => {
               return <Tag 
-              key = {tag.id}
+              key = {String(tag.id)}
               title={tag.name}/>
             })
           }
