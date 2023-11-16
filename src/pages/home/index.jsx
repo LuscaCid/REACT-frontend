@@ -1,5 +1,5 @@
 import {FiPlus, FiSearch} from 'react-icons/fi'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { Container, Brand, Menu, Search, Content, NewNote } from './style'
 import { ButtonText } from '../../components/buttonText'
 import {Header} from '../../components/header'
@@ -8,13 +8,15 @@ import { Note } from '../../components/notes'
 import { Section } from '../../components/section'
 import { api } from '../../services/api'
 import { useEffect, useState } from 'react'
-import { useAuth } from '../../hooks/auth'
+
 
 export function Home(){
   const [search, setSearch] = useState('')
   const [tags, setTags] = useState([])
   const [notes, setNotes] = useState([])
   const [tagsSelected, setTagsSelected] = useState([])
+
+  const navigate = useNavigate()
 
   function handleSelectTag(tagName){
     if(tagsSelected.includes(tagName)){
@@ -25,6 +27,10 @@ export function Home(){
       setTagsSelected(prevState => [...prevState , tagName])
     }
     
+  }
+
+  function handleDetails(id){//id da nota que vai ser carregada
+    navigate(`/details/${id}`)
   }
 
   useEffect(()=> {//roda sempre que a tela eh renderizada
@@ -54,7 +60,13 @@ export function Home(){
       </Brand>
 
       <Menu>
-        <li><ButtonText title='Todos' isActive = {tagsSelected.length === 0}/></li>
+        <li><ButtonText 
+        onClick = {(e)=> {
+          e.preventDefault()
+          setTagsSelected([])
+        }}
+        title='Todos'
+        isActive = {tagsSelected.length === 0}/></li>
         {tags && tags.map(tag => {
           return <li key ={tag.id}> 
             <ButtonText
@@ -84,6 +96,7 @@ export function Home(){
               return <Note
               key = {String(note.id)}
               data = {note}
+              onClick = {()=> handleDetails(note.id)}
               />
             })
           }

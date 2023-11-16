@@ -4,42 +4,86 @@ import { Header } from '../../components/header'
 import {CreateButtonSend} from '../../components/button'
 import { Section } from '../../components/section'
 import { ButtonText } from '../../components/buttonText'
-
+import { useEffect, useState } from 'react'
+import { api } from '../../services/api'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 export function Details() {
- 
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [id, setId] = useState(null)
+  const [links, setLinks] = useState(null)
+  const [tags, setTags] = useState(null)
+
+  const navigate = useNavigate()
+
+  const params = useParams()
+
+  async function handleDeleteNote(){
+  
+    const sureDelete = confirm('tem certeza disso?')
+    console.log(sureDelete)
+    if(sureDelete){
+      await api.delete(`/deletenote/${id}`)
+      alert('deletado com sucesso.')
+      navigate('/')
+    }
+  }
+
+  useEffect(()=>{
+    async function loadClickedNote(){
+      const response = await api.get(`/show/${params.id}`)
+      console.log(response)
+      const note = response.data.actualNote
+      const arrayLinks = response.data.links
+      const arrayTags = response.data.tags
+      setId(note.id)
+      setTitle(note.tittle)
+      setDescription(note.description)
+      setLinks(arrayLinks)
+      setTags(arrayTags)
+    } 
+    loadClickedNote()
+  }, [] )
+
   return (
     
     <Container>
       <Header/>
 
       <main>
-        <Content>
+        <Content>        
+        <ButtonText
+        onClick = {handleDeleteNote}
+        title= 'excluir nota'/>
 
-
-        
-        <ButtonText title= 'excluir nota'/>
-
-        <h1>Introdução ao React</h1>
+        <h1>{title}</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt odio facilis animi autem consequatur velit, pariatur soluta sint! Minima at perspiciatis ipsa. Numquam ducimus voluptas reprehenderit sunt, officia eligendi praesentium.
+          {description}
         </p>
         <Section title='Links úteis'>
         <Links>
-          <li>
-            <a href="#" target='_blank'>meu linkedas.com</a>
-          </li>
-          <li>
-            <a href="#" target='_blank'>meu git.com</a>
-          </li>
+          {
+            links && links.map(link => {
+              return <li key ={link.id}>
+                <a href={link.url} target='_blank'>{link.url}</a>
+                </li>
+            })
+          }
 
         </Links>
         </Section>
         <Section title='Marcadores'>
-          <Tag title='node.js'/>
-          <Tag title='node.js'/>
+          {
+            tags && tags.map(tag => {
+              return <Tag 
+              key = {tag.id}
+              title={tag.name}/>
+            })
+          }
         </Section>
-        
+        <Link to= '/'>
           <CreateButtonSend title= "Voltar"/>
+        </Link>
         </Content>
       </main>
     </Container>

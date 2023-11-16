@@ -8,6 +8,11 @@ export const Container = styled.button`
   border: none;
   border-radius: 1rem;
   color: white;
+  cursor: pointer;
+  transition: filter 0.4s;
+  &:hover{
+    filter: brightness(.9);
+  }
   >h1{
     flex: 1;
     text-align: left;
