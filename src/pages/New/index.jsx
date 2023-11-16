@@ -5,10 +5,15 @@ import { Textarea } from "../../components/Textarea";
 import {Section} from '../../components/section'
 import { NoteItem } from "../../components/NoteItem";
 import { CreateButtonSend } from '../../components/button'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {FiLink} from 'react-icons/fi'
 import { useState } from "react";
+
+import { api } from "../../services/api";
+
 export const NewNote = () => {
+  const navigate = useNavigate()
+  
   const [links, setLinks] = useState([])
   const [newLink, setNewLink] = useState('')
 
@@ -43,8 +48,15 @@ export const NewNote = () => {
   
   }
   
-  function handleCreateNote(){
-    
+  async function handleCreateNote(){
+    await api.post('/notes', {
+      tittle,
+      description,
+      tags,
+      links
+    })
+    alert('cadastrada com sucesso!')
+    navigate('/')
   }
 
   return (

@@ -6,7 +6,7 @@ import { api } from '../../services/api'
 
 export function Header (){
     const {signOut, user} = useAuth()
-    const avatar = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : bgProfileImg
+    const avatar = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : bgProfilePhoto
     function logout(){
         signOut()
     }

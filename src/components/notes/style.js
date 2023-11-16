@@ -15,6 +15,10 @@ export const Container = styled.button`
     font-size: 2.8rem;
     color: ${({theme})=> theme.COLORS.WHITE};
   }
+  >p{
+    margin-top: .7rem;
+    text-align: left;
+  }
   >footer{
     width: 100%;
     display: flex;
