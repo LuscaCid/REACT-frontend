@@ -7,7 +7,46 @@ import { NoteItem } from "../../components/NoteItem";
 import { CreateButtonSend } from '../../components/button'
 import {Link} from 'react-router-dom'
 import {FiLink} from 'react-icons/fi'
+import { useState } from "react";
 export const NewNote = () => {
+  const [links, setLinks] = useState([])
+  const [newLink, setNewLink] = useState('')
+
+  const [tags, setTags] = useState([])
+  const [newTag, setNewTag] = useState('')
+
+  const [tittle, setTittle] = useState('')
+  const [description, setDescription] = useState('')
+
+  function handleAddTag(e){
+    e.preventDefault()
+    if(!newTag)return alert('campo vazio')
+    setTags(prevState => [...prevState, newTag])
+    setNewTag('')//resetando o valor da tag 
+    console.log(tags)
+  }
+  // tenho um vetor que vai armazenar os links que vao ser inseridos no db
+  function handleAddLink(e){
+    e.preventDefault()
+    setLinks(prevState => [...prevState, newLink])// tanto dessa forma quanto da outra
+    setNewLink('')
+    console.log(links)
+  }
+
+  function handleDeleteLink( deleted){
+    setLinks(prevState => prevState.filter(link => link !== deleted))
+    console.log(links)
+    /**
+     * ele vai retornar pra mim apenas os links que forem diferentes
+     * do que eu passar como parametro na function
+     */
+  
+  }
+  
+  function handleCreateNote(){
+    
+  }
+
   return (
     <Container>
       <Header/>
@@ -20,26 +59,58 @@ export const NewNote = () => {
               <Link to='/'>Voltar</Link>
               
             </header>
-            <Input type="text" placeholder = "Título"/>
-            <Textarea placeholder="Observações"/>
+            <Input 
+            onChange = {e=> setTittle(e.target.value)}
+            type="text" 
+            placeholder = "Título"/>
+            <Textarea 
+            onChange = {e=> setDescription(e.target.value)}
+            placeholder="Observações"/>
             <Section title="Links úteis"/>
+            {
+              links.map((link, index) => {
+                return <NoteItem 
+                key = {String(index)}
+                onClick={(e)=>{ 
+                  e.preventDefault()
+                  handleDeleteLink(link)}}
+                value = {link}
+                />
+                
+              })
+            }
             <NoteItem 
-            value = "https://github.com/luscacid"
-            isNew = {false}/>
-            <NoteItem 
+            onChange = {e => setNewLink(e.target.value)}
+            onClick={handleAddLink}
             placeholder = "Novo link"
+            value = {newLink}
             isNew/>
 
             <Section title="Marcadores"/>
             <div className="flex">
+            {}
+            {
+              tags.map((tag,index) => {
+                return <NoteItem
+                  value ={tag}
+                  key = {String(index)}
+                  onClick={(event)=>{
+                    event.preventDefault()
+                    setTags(prevState => prevState.filter(element => element !== tag))
+                  }}
+                />
+              })
+            }
             <NoteItem 
-            value = "https://github.com/luscacid"
-            isNew = {false}/>
-            <NoteItem 
-            placeholder = "Novo link"
+            value = {newTag}
+            onChange = {e => setNewTag(e.target.value)}
+            onClick={handleAddTag}
+            placeholder = "Nova tag"
             isNew/>
             </div>
-            <CreateButtonSend title= "Salvar" />
+            <CreateButtonSend 
+            onClick = {handleCreateNote}
+            title= "Salvar" />
           </Form>
       </main>
     </Container>

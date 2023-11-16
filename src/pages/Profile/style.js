@@ -19,7 +19,7 @@ export const Container = styled.div`
 ` 
 
 export const Form = styled.form`
-  margin: -12rem auto;
+  margin: 0rem auto;
   width: 40rem;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,7 @@ export const Avatar = styled.div`
   >img{
     width: 22rem;
     border-radius: 50%;
-
+    margin-top: -12rem;
     height: 22rem;
   }
   >label {

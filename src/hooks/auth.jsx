@@ -6,7 +6,7 @@ export const AuthContext = createContext({})
 
  function AuthProvider({children }) {
 
-  const [data, setData] = useState({user : "lucasfelipaaa@gmail.com"})
+  const [data, setData] = useState({})
 
   async function signIn({email, password}) {
     try{
@@ -36,6 +36,52 @@ export const AuthContext = createContext({})
    * useEffect vai apenas executar quando o component for renderizado
    * pegando a informação de dentro do localStorage 
    */
+
+  async function updateProfilePhoto({user ,fileIndex}){
+    console.log('entrou aqui')
+    console.log(fileIndex)
+    try{
+      const fileUploadForm = new FormData()
+      fileUploadForm.append("avatar", fileIndex)
+      const response = await api.patch('/avatar', fileUploadForm)       
+      return response
+      
+  }
+    catch (error){
+      return console.log(error)
+    }
+  }
+  async function updateUser({userUpdate}){
+    try{
+      const email = userUpdate.email
+      const name = userUpdate.name
+      const response = await api.put('/users', {email, name})
+      const userExists = response.data
+      console.log(userExists)
+      localStorage.setItem('@rocketNotes:user', JSON.stringify(userExists))
+      localStorage.setItem('@rocketNotes:token',data.token)
+      setData({user :userExists, token: data.token})
+      alert('Atualizado com sucesso')
+    } catch (error) {
+      if(error.response)alert(error.response.data.message)
+      else alert ('nao foi possivel atualizar')
+    } 
+  }
+
+  async function updateUserPassword({userUpdate}){
+    try{
+      const oldPassword = userUpdate.oldPassword
+      const newPassword = userUpdate.newPassword
+      const user = await api.put('/userspassword', { oldPassword, newPassword })
+      localStorage.setItem('@rocketNotes:user', JSON.stringify(user.response.data))
+      localStorage.setItem('@rocketNotes:token',data.token)
+      setData({user, token: data.token})
+      alert('Atualizado com sucesso')
+    } catch (error) {
+      if(error.response)alert(error.response.data.message)
+      else alert ('nao foi possivel atualizar')
+    } 
+  }
   useEffect(()=> {
     const token = localStorage.getItem('@rocketNotes:token')
     const user = localStorage.getItem('@rocketNotes:user')
@@ -46,10 +92,15 @@ export const AuthContext = createContext({})
         user : JSON.parse(user) 
       })
 
+    } else {
+      signOut()
     }
   }, [])
   return (
     <AuthContext.Provider value={{
+      updateProfilePhoto,
+      updateUserPassword,
+      updateUser,
       signOut,
       signIn,
       user : data.user

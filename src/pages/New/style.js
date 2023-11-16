@@ -40,8 +40,10 @@ export const Form = styled.form`
 
   >.flex{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     gap: 1rem;
+    
   }
 `
 export const Links = styled.li`
