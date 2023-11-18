@@ -53,7 +53,7 @@ export function Profile(){
   return (
     <Container>
       <header>
-        <Link to="/">
+        <Link to={-1}>
           <FiArrowLeft/>
         </Link>
       </header>

@@ -56,7 +56,7 @@ export const NewNote = () => {
       links
     })
     alert('cadastrada com sucesso!')
-    navigate('/')
+    navigate(-1)
   }
 
   return (
@@ -68,7 +68,7 @@ export const NewNote = () => {
             <header>
               <h1>Criar nota</h1>
                     
-              <Link to='/'>Voltar</Link>
+              <Link to={-1}>Voltar</Link>
               
             </header>
             <Input 

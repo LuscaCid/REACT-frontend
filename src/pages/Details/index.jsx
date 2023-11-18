@@ -25,8 +25,11 @@ export function Details() {
     if(sureDelete){
       await api.delete(`/deletenote/${id}`)
       alert('deletado com sucesso.')
-      navigate('/')
+      navigate(-1)
     }
+  }
+  function handleBack(){
+    navigate(-1)//volta para a pagina anterior
   }
 
   useEffect(()=>{
@@ -81,9 +84,11 @@ export function Details() {
             })
           }
         </Section>
-        <Link to= '/'>
-          <CreateButtonSend title= "Voltar"/>
-        </Link>
+        
+        <CreateButtonSend 
+        onClick = {handleBack}
+        title= "Voltar"/>
+        
         </Content>
       </main>
     </Container>
