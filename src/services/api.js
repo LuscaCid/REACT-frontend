@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL : "https://deploy-rocketnotes.onrender.com"
+  baseURL : "https://deploy-rocket-api.onrender.com"
 })
 
 /**
