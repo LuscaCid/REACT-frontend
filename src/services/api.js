@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL : "http://18.230.74.245:3333"
+  baseURL : "https://node-deploy-1l6c.onrender.com"
 })
 
 /**
